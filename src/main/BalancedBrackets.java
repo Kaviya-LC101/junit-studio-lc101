@@ -22,13 +22,27 @@ public class BalancedBrackets {
      * @return true if balanced, false otherwise
      */
     public static boolean hasBalancedBrackets(String str) {
+        if(str.isEmpty()){
+            throw new IllegalArgumentException("Empty String");
+            }
         int brackets = 0;
+        int squareBracket=0;
         for (char ch : str.toCharArray()) {
             if (ch == '[') {
                 brackets++;
+                squareBracket++;
             } else if (ch == ']') {
-                brackets--;
+                if(brackets==0){
+                    return false;
+                }else{
+                    brackets--;
+                    squareBracket++;
+                }
+
             }
+        }
+        if(squareBracket == 0){
+           throw new IllegalArgumentException("String does not have Square Brackets");
         }
         return brackets == 0;
     }
